@@ -9,18 +9,18 @@
 int
 exec_cmd(char *cmd)
 {
-    int rv;
+	int rv;
 
-    fmTerm();
-    if ((rv = system(cmd))) {
-	printf("\n[Hit any key]");
-	fflush(stdout);
+	fmTerm();
+	if ((rv = system(cmd))) {
+		printf("\n[Hit any key]");
+		fflush(stdout);
+		fmInit();
+		getch();
+
+		return rv;
+	}
 	fmInit();
-	getch();
 
-	return rv;
-    }
-    fmInit();
-
-    return 0;
+	return 0;
 }

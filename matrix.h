@@ -1,9 +1,9 @@
 /* $Id: matrix.h,v 1.7 2002/07/18 14:59:02 ukai Exp $ */
-/* 
+/*
  * matrix.h, matrix.c: Liner equation solver using LU decomposition.
- * 
+ *
  * by K.Okabe  Aug. 1999
- * 
+ *
  * You can use,copy,modify and distribute this program without any permission.
  */
 
@@ -11,31 +11,31 @@
 #include <math.h>
 #include <string.h>
 
-/* 
+/*
  * Types.
  */
 
 struct matrix {
-    double *me;
-    int dim;
+	double *me;
+	int dim;
 };
 
 struct vector {
-    double *ve;
-    int dim;
+	double *ve;
+	int dim;
 };
 
 typedef struct matrix *Matrix;
 typedef struct vector *Vector;
 
-/* 
+/*
  * Macros.
  */
 
 #define M_VAL(m,i,j) ((m)->me[(i)*(m)->dim +(j)])
 #define V_VAL(v,i) ((v)->ve[i])
 
-/* 
+/*
  * Compatible macros with those in Meschach Library.
  */
 
@@ -66,4 +66,4 @@ extern Matrix new_matrix(int);
 extern Vector new_vector(int);
 
 #define _MATRIX_H
-#endif				/* _MATRIX_H */
+#endif							/* _MATRIX_H */

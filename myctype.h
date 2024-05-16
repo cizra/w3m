@@ -29,7 +29,7 @@
 extern unsigned char MYCTYPE_MAP[];
 extern unsigned char MYCTYPE_DIGITMAP[];
 
-#define	TOLOWER(x)	(IS_ALPHA(x) ? ((x)|0x20) : (x))
-#define	TOUPPER(x)	(IS_ALPHA(x) ? ((x)&~0x20) : (x))
+#define TOLOWER(x)		(IS_ALPHA(x) ? ((x)|0x20) : (x))
+#define TOUPPER(x)		(IS_ALPHA(x) ? ((x)&~0x20) : (x))
 
 #endif

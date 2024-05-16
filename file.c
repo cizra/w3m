@@ -22,10 +22,10 @@
 #include "regex.h"
 
 #ifndef max
-#define max(a,b)        ((a) > (b) ? (a) : (b))
+#define max(a,b)	((a) > (b) ? (a) : (b))
 #endif				/* not max */
 #ifndef min
-#define min(a,b)        ((a) > (b) ? (b) : (a))
+#define min(a,b)	((a) > (b) ? (b) : (a))
 #endif				/* not min */
 
 #define MAX_INPUT_SIZE 80 /* TODO - max should be screen line length */
@@ -71,7 +71,7 @@ static Str cur_option_label;
 static int cur_option_selected;
 static int cur_status;
 #ifdef MENU_SELECT
-/* menu based <select>  */
+/* menu based <select>	*/
 FormSelectOption *select_option;
 int max_select = MAX_SELECT;
 static int n_select;
@@ -217,7 +217,7 @@ int
 currentLn(Buffer *buf)
 {
     if (buf->currentLine)
-	/*     return buf->currentLine->real_linenumber + 1;      */
+	/*     return buf->currentLine->real_linenumber + 1;	  */
 	return buf->currentLine->linenumber + 1;
     else
 	return 1;
@@ -619,10 +619,10 @@ readHeader(URLFile *uf, Buffer *newBuf, int thru, ParsedURL *pu)
 	if(w3m_reqlog){
 	    FILE *ff;
 	    ff = fopen(w3m_reqlog, "a");
-            if(ff){
-	        Strfputs(tmp, ff);
-	        fclose(ff);
-            }
+	    if(ff){
+		Strfputs(tmp, ff);
+		fclose(ff);
+	    }
 	}
 	if (src)
 	    Strfputs(tmp, src);
@@ -842,10 +842,10 @@ readHeader(URLFile *uf, Buffer *newBuf, int thru, ParsedURL *pu)
 		int err;
 		if (show_cookie) {
 		    if (flag & COO_SECURE)
-		        disp_message_nsec("Received a secured cookie", FALSE, 1,
+			disp_message_nsec("Received a secured cookie", FALSE, 1,
 				      TRUE, FALSE);
 		    else
-		        disp_message_nsec(Sprintf("Received cookie: %s=%s",
+			disp_message_nsec(Sprintf("Received cookie: %s=%s",
 					      name->ptr, value->ptr)->ptr,
 				      FALSE, 1, TRUE, FALSE);
 		}
@@ -1190,27 +1190,27 @@ AuthBasicCred(struct http_auth *ha, Str uname, Str pw, ParsedURL *pu,
 
 /* RFC2617: 3.2.2 The Authorization Request Header
  *
- * credentials      = "Digest" digest-response
+ * credentials	    = "Digest" digest-response
  * digest-response  = 1#( username | realm | nonce | digest-uri
- *                    | response | [ algorithm ] | [cnonce] |
- *                     [opaque] | [message-qop] |
- *                         [nonce-count]  | [auth-param] )
+ *		      | response | [ algorithm ] | [cnonce] |
+ *		       [opaque] | [message-qop] |
+ *			   [nonce-count]  | [auth-param] )
  *
- * username         = "username" "=" username-value
+ * username	    = "username" "=" username-value
  * username-value   = quoted-string
- * digest-uri       = "uri" "=" digest-uri-value
+ * digest-uri	    = "uri" "=" digest-uri-value
  * digest-uri-value = request-uri   ; As specified by HTTP/1.1
- * message-qop      = "qop" "=" qop-value
- * cnonce           = "cnonce" "=" cnonce-value
+ * message-qop	    = "qop" "=" qop-value
+ * cnonce	    = "cnonce" "=" cnonce-value
  * cnonce-value     = nonce-value
- * nonce-count      = "nc" "=" nc-value
- * nc-value         = 8LHEX
- * response         = "response" "=" request-digest
+ * nonce-count	    = "nc" "=" nc-value
+ * nc-value	    = 8LHEX
+ * response	    = "response" "=" request-digest
  * request-digest = <"> 32LHEX <">
- * LHEX             =  "0" | "1" | "2" | "3" |
- *                     "4" | "5" | "6" | "7" |
- *                     "8" | "9" | "a" | "b" |
- *                     "c" | "d" | "e" | "f"
+ * LHEX		    =  "0" | "1" | "2" | "3" |
+ *		       "4" | "5" | "6" | "7" |
+ *		       "8" | "9" | "a" | "b" |
+ *		       "c" | "d" | "e" | "f"
  */
 
 static Str
@@ -1299,7 +1299,7 @@ AuthDigestCred(struct http_auth *ha, Str uname, Str pw, ParsedURL *pu,
     if (algorithm) {
 	if (strcasecmp(algorithm->ptr, "MD5-sess") == 0) {
 	    /* A1 = H(unq(username-value) ":" unq(realm-value) ":" passwd)
-	     *      ":" unq(nonce-value) ":" unq(cnonce-value)
+	     *	    ":" unq(nonce-value) ":" unq(cnonce-value)
 	     */
 	    if (nonce == NULL)
 		return NULL;
@@ -1348,12 +1348,12 @@ AuthDigestCred(struct http_auth *ha, Str uname, Str pw, ParsedURL *pu,
     a2buf = digest_hex(md5);
 
     if (qop_i >= QOP_AUTH) {
-	/* request-digest  = <"> < KD ( H(A1),     unq(nonce-value)
-	 *                      ":" nc-value
-	 *                      ":" unq(cnonce-value)
-	 *                      ":" unq(qop-value)
-	 *                      ":" H(A2)
-	 *                      ) <">
+	/* request-digest  = <"> < KD ( H(A1),	   unq(nonce-value)
+	 *			":" nc-value
+	 *			":" unq(cnonce-value)
+	 *			":" unq(qop-value)
+	 *			":" H(A2)
+	 *			) <">
 	 */
 	if (nonce == NULL)
 	    return NULL;
@@ -1377,10 +1377,10 @@ AuthDigestCred(struct http_auth *ha, Str uname, Str pw, ParsedURL *pu,
     }
 
     /*
-     * digest-response  = 1#( username | realm | nonce | digest-uri
-     *                          | response | [ algorithm ] | [cnonce] |
-     *                          [opaque] | [message-qop] |
-     *                          [nonce-count]  | [auth-param] )
+     * digest-response	= 1#( username | realm | nonce | digest-uri
+     *				| response | [ algorithm ] | [cnonce] |
+     *				[opaque] | [message-qop] |
+     *				[nonce-count]  | [auth-param] )
      */
 
     tmp = Strnew_m_charp("Digest username=\"", uname->ptr, "\"", NULL);
@@ -1426,22 +1426,22 @@ struct auth_param basic_auth_param[] = {
 
 #ifdef USE_DIGEST_AUTH
 /* RFC2617: 3.2.1 The WWW-Authenticate Response Header
- * challenge        =  "Digest" digest-challenge
+ * challenge	    =  "Digest" digest-challenge
  *
  * digest-challenge  = 1#( realm | [ domain ] | nonce |
- *                       [ opaque ] |[ stale ] | [ algorithm ] |
- *                        [ qop-options ] | [auth-param] )
+ *			 [ opaque ] |[ stale ] | [ algorithm ] |
+ *			  [ qop-options ] | [auth-param] )
  *
- * domain            = "domain" "=" <"> URI ( 1*SP URI ) <">
- * URI               = absoluteURI | abs_path
- * nonce             = "nonce" "=" nonce-value
- * nonce-value       = quoted-string
- * opaque            = "opaque" "=" quoted-string
- * stale             = "stale" "=" ( "true" | "false" )
- * algorithm         = "algorithm" "=" ( "MD5" | "MD5-sess" |
- *                        token )
- * qop-options       = "qop" "=" <"> 1#qop-value <">
- * qop-value         = "auth" | "auth-int" | token
+ * domain	     = "domain" "=" <"> URI ( 1*SP URI ) <">
+ * URI		     = absoluteURI | abs_path
+ * nonce	     = "nonce" "=" nonce-value
+ * nonce-value	     = quoted-string
+ * opaque	     = "opaque" "=" quoted-string
+ * stale	     = "stale" "=" ( "true" | "false" )
+ * algorithm	     = "algorithm" "=" ( "MD5" | "MD5-sess" |
+ *			  token )
+ * qop-options	     = "qop" "=" <"> 1#qop-value <">
+ * qop-value	     = "auth" | "auth-int" | token
  */
 struct auth_param digest_auth_param[] = {
     {"realm", NULL},
@@ -2112,7 +2112,7 @@ loadGeneralFile(char *path, ParsedURL *volatile current, char *referer,
     }
 
     /* XXX: can we use guess_type to give the type to loadHTMLstream
-     *      to support default utf8 encoding for XHTML here? */
+     *	    to support default utf8 encoding for XHTML here? */
     f.guess_type = t;
 
   page_loaded:
@@ -3850,22 +3850,22 @@ process_button(struct parsed_tag *tag)
        switch (v) {
        case FORM_INPUT_SUBMIT:
        case FORM_INPUT_BUTTON:
-           q = "SUBMIT";
-           break;
+	   q = "SUBMIT";
+	   break;
        case FORM_INPUT_RESET:
-           q = "RESET";
-           break;
+	   q = "RESET";
+	   break;
        }
     }
     if (q) {
        qq = html_quote(q);
     }
 
-    /*    Strcat_charp(tmp, "<pre_int>"); */
+    /*	  Strcat_charp(tmp, "<pre_int>"); */
     Strcat(tmp, Sprintf("<input_alt hseq=\"%d\" fid=\"%d\" type=\"%s\" "
-                       "name=\"%s\" value=\"%s\">",
-                       cur_hseq++, cur_form_id, html_quote(p),
-                       html_quote(r), qq));
+		       "name=\"%s\" value=\"%s\">",
+		       cur_hseq++, cur_form_id, html_quote(p),
+		       html_quote(r), qq));
     return tmp;
 }
 
@@ -3874,7 +3874,7 @@ process_n_button(void)
 {
     Str tmp = Strnew();
     Strcat_charp(tmp, "</input_alt>");
-    /*    Strcat_charp(tmp, "</pre_int>"); */
+    /*	  Strcat_charp(tmp, "</pre_int>"); */
     return tmp;
 }
 
@@ -4405,9 +4405,9 @@ process_idattr(struct readbuffer *obuf, int cmd, struct parsed_tag *tag)
       envs[h_env->envc].env = cmd; \
       envs[h_env->envc].count = 0; \
       if (h_env->envc <= MAX_INDENT_LEVEL) \
-        envs[h_env->envc].indent = envs[h_env->envc - 1].indent + INDENT_INCR; \
+	envs[h_env->envc].indent = envs[h_env->envc - 1].indent + INDENT_INCR; \
       else \
-        envs[h_env->envc].indent = envs[h_env->envc - 1].indent; \
+	envs[h_env->envc].indent = envs[h_env->envc - 1].indent; \
     }
 
 #define PUSH_ENV_NOINDENT(cmd) \
@@ -4462,7 +4462,7 @@ getMetaRefreshParam(char *q, Str *refresh_uri)
 	    s_tmp = Strnew_charp_n(q, r - q);
 
 	    if (s_tmp->length > 0 &&
-	        (s_tmp->ptr[s_tmp->length - 1] == '\"' ||	/* " */
+		(s_tmp->ptr[s_tmp->length - 1] == '\"' ||	/* " */
 		 s_tmp->ptr[s_tmp->length - 1] == '\'')) {	/* ' */
 		s_tmp->length--;
 		s_tmp->ptr[s_tmp->length] = '\0';
@@ -7022,7 +7022,7 @@ showProgress(clen_t * linelen, clen_t * trbyte)
 			       eta / (60 * 60), (eta / 60) % 60, eta % 60);
 	}
 	else {
-	    messages = Sprintf("%11s %3.0f%%                          ",
+	    messages = Sprintf("%11s %3.0f%%			      ",
 			       fmtrbyte, ratio);
 	}
 	addstr(messages->ptr);
@@ -7790,7 +7790,7 @@ loadImageBuffer(URLFile *uf, Buffer *newBuf)
     tmpf = tmpfname(TMPF_SRC, ".html");
     src = fopen(tmpf->ptr, "w");
     if (src == NULL)
-        return NULL;
+	return NULL;
     newBuf->mailcap_source = tmpf->ptr;
 
     init_stream(&f, SCM_LOCAL, newStrStream(tmp));
@@ -8915,4 +8915,4 @@ guess_save_name(Buffer *buf, char *path)
 /* Local Variables:    */
 /* c-basic-offset: 4   */
 /* tab-width: 8        */
-/* End:                */
+/* End:		       */

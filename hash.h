@@ -33,7 +33,7 @@ newHash_##sym(int size)\
   hash->size = size;\
   hash->tab = (HashItem_##sym**)GC_malloc(size*sizeof(HashItem_##sym*));\
   for (i = 0; i < size; i++)\
-    hash->tab[i] = NULL;\
+	hash->tab[i] = NULL;\
   return hash;\
 }\
 \
@@ -44,8 +44,8 @@ lookupHash_##sym(Hash_##sym *t, keytype key, int *hashval_return)\
 \
   *hashval_return = hashfunc(key)%t->size;\
   for (hi = t->tab[*hashval_return]; hi != NULL; hi = hi->next) {\
-    if (keycomp(hi->key,key))\
-      return hi;\
+	if (keycomp(hi->key,key))\
+	  return hi;\
   }\
   return NULL;\
 }\
@@ -58,8 +58,8 @@ putHash_##sym(Hash_##sym *t, keytype key, type value)\
 \
   hi = lookupHash_##sym(t,key,&h);\
   if (hi) {\
-    hi->value = value;\
-    return;\
+	hi->value = value;\
+	return;\
   }\
 \
   hi = (HashItem_##sym*)GC_malloc(sizeof(HashItem_##sym));\
@@ -77,7 +77,7 @@ getHash_##sym(Hash_##sym *t, keytype key, type failval)\
 \
   hi = lookupHash_##sym(t,key,&h);\
   if (hi == NULL)\
-    return failval;\
+	return failval;\
   return hi->value;\
 }
 #define defhashfunc_i(keytype,type,sym) \
@@ -91,7 +91,7 @@ newHash_##sym(int size)\
   hash->size = size;\
   hash->tab = (HashItem_##sym**)GC_malloc(size*sizeof(HashItem_##sym*));\
   for (i = 0; i < size; i++)\
-    hash->tab[i] = NULL;\
+	hash->tab[i] = NULL;\
   return hash;\
 }\
 \
@@ -102,8 +102,8 @@ lookupHash_##sym(Hash_##sym *t, keytype key, int *hashval_return)\
 \
   *hashval_return = key%t->size;\
   for (hi = t->tab[*hashval_return]; hi != NULL; hi = hi->next) {\
-    if (hi->key == key)\
-      return hi;\
+	if (hi->key == key)\
+	  return hi;\
   }\
   return NULL;\
 }\
@@ -116,8 +116,8 @@ putHash_##sym(Hash_##sym *t, keytype key, type value)\
 \
   hi = lookupHash_##sym(t,key,&h);\
   if (hi) {\
-    hi->value = value;\
-    return;\
+	hi->value = value;\
+	return;\
   }\
 \
   hi = (HashItem_##sym*)GC_malloc(sizeof(HashItem_##sym));\
@@ -135,7 +135,7 @@ getHash_##sym(Hash_##sym *t, keytype key, type failval)\
 \
   hi = lookupHash_##sym(t,key,&h);\
   if (hi == NULL)\
-    return failval;\
+	return failval;\
   return hi->value;\
 }
-#endif				/* not HASH_H */
+#endif							/* not HASH_H */

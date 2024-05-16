@@ -40,4 +40,4 @@ extern int get_pixel_per_cell(int *ppc, int *ppl);
 
 char getch(void);
 
-#endif				/* not TERMS_H */
+#endif							/* not TERMS_H */
